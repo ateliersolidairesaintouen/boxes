@@ -86,8 +86,7 @@ class Aereni(Boxes):
     def wall2(self):
         t = self.thickness
         self.hexHolesRectangle(self.y, self.h * 0.25+5)
-        self.rectangularHole(5, self.h * 0.65, 115, 110, r=0, center_x=False, center_y=True)
-
+        self.rectangularHole(5, self.h * 0.65, self.y * 0.96, self.h * 0.65, r=0, center_x=False, center_y=True)
 
     def wall3(self):
         t = self.thickness
