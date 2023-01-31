@@ -76,6 +76,7 @@ class Aereni(Boxes):
         self.fingerHolesAt(self.x-t, self.y * 0.01, self.triangle, 90)
 
     def wall1(self):
+        # Left
         t = self.thickness
         self.fingerHolesAt(t, self.h*0.3, self.x - t, 0)
         self.hole(self.x / 2, self.h - self.d4, d=25)
@@ -84,11 +85,13 @@ class Aereni(Boxes):
         self.hexHolesRectangle(self.x, self.h * 0.3-5)
 
     def wall2(self):
+        # Front
         t = self.thickness
         self.hexHolesRectangle(self.y, self.h * 0.25+5)
         self.rectangularHole(t, self.h * 0.65, self.y - (t * 2), self.h * 0.65, r=0, center_x=False, center_y=True)
 
     def wall3(self):
+        # Right
         t = self.thickness
         self.fingerHolesAt(t, self.h*0.3, self.x - t, 0)
         self.fingerHolesAt(self.x-t*1.5, self.h*0.3, 25, 90)
@@ -96,6 +99,7 @@ class Aereni(Boxes):
         self.hexHolesRectangle(self.x, self.h * 0.25+5)
 
     def wall4(self):
+        # Back
         t = self.thickness
         self.hexHolesRectangle(self.y, self.h * 0.25+5)
 
@@ -126,12 +130,12 @@ class Aereni(Boxes):
                              "eFfF",
                              callback=[self.wall2],
                              move="up",
-                             label="Wall 2")
+                             label="Front")
         self.rectangularWall(y,
                              h,
                              "eFfF",
                              callback=[self.wall4],
-                             label="Wall 4")
+                             label="Back")
         self.rectangularWall(x,
                              h,
                              "efff",
@@ -143,7 +147,7 @@ class Aereni(Boxes):
                              "fefe",
                              callback=[self.wallMid],
                              move="right",
-                             label="middle")
+                             label="Middle")
         self.rectangularWall(x,
                              y,
                              "FFFF",
