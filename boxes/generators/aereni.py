@@ -31,16 +31,13 @@ class Aereni(Boxes):
             help='profondeur of the box'
         )
         self.argparser.add_argument(
-            '--y', action='store', type=int, default=130,
+            '--y', action='store', type=int, default=150,
             help='large of the box'
         )
         self.argparser.add_argument(
-            '--h', action='store', type=int, default=180,
+            '--h', action='store', type=int, default=200,
             help='height of the box'
         )
-        self.argparser.add_argument(
-            "--triangle", action="store", type=float, default=25.,
-            help="Sides of the triangles holding the lid in mm")
         self.argparser.add_argument(
             "--d1", action="store", type=float, default=2.,
             help="Diameter of the inner lid screw holes in mm")
@@ -65,23 +62,17 @@ class Aereni(Boxes):
 
     def wallMid(self):
         t = self.thickness
-        self.fingerHolesAt(self.x-(t*2), self.y * 0.8, self.triangle, 90)
-        self.fingerHolesAt(self.x-(t*2), self.y * 0.01, self.triangle, 90)
         self.hole(self.x / 2, self.h - 90, d=self.d4)
         self.hole(self.x / 2, self.h - 140, d=self.d4)
 
     def wallTop(self):
         t = self.thickness
-        self.fingerHolesAt(self.x-t, self.y * 0.8, self.triangle, 90)
-        self.fingerHolesAt(self.x-t, self.y * 0.01, self.triangle, 90)
 
     def wall1(self):
         # Left
         t = self.thickness
         self.fingerHolesAt(t, self.h*0.3, self.x - t, 0)
         self.hole(self.x / 2, self.h - self.d4, d=25)
-        self.fingerHolesAt(self.x-t*1.5, self.h*0.3, 25, 90)
-        self.fingerHolesAt(self.x-t*1.5, self.h-25, 25, 90)
         self.hexHolesRectangle(self.x, self.h * 0.3-5)
 
     def wall2(self):
@@ -94,8 +85,6 @@ class Aereni(Boxes):
         # Right
         t = self.thickness
         self.fingerHolesAt(t, self.h*0.3, self.x - t, 0)
-        self.fingerHolesAt(self.x-t*1.5, self.h*0.3, 25, 90)
-        self.fingerHolesAt(self.x-t*1.5, self.h-25, 25, 90)
         self.hexHolesRectangle(self.x, self.h * 0.25+5)
 
     def wall4(self):
@@ -111,8 +100,6 @@ class Aereni(Boxes):
         d1, d2, d3, d4 =self.d1, self.d2, self.d3, self.d4
         hd = self.holedist
         pd = self.pmdist
-        tr = self.triangle
-        trh = tr / 3.
 
         if self.outside:
             self.x = x = self.adjustSize(x)
@@ -154,6 +141,3 @@ class Aereni(Boxes):
                              callback=[self.wallTop],
                              move='up',
                              label="Top")
-
-        self.rectangularTriangle(tr, tr, "ffe", num=4,
-            callback=[None, lambda: self.hole(trh, trh, d=d1)])
